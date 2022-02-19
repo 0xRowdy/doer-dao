@@ -1,34 +1,30 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.4.24;
+pragma solidity >=0.7.0 <0.9.0;
 
-import "./Tree.sol";
+contract ActionFactory {
+    mapping(address => address) public parents;
 
-contract ActionFactory is Tree {
-    bytes32 public actionName;
-    bytes32 public actionParent;
-
-    function createAction(
-        address _parent,
-        string _nodeData,
+    event CreateAction(
+        address indexed _action,
+        address indexed _parent,
         uint256 _data
-    ) public {
-        Action action = new Action(_data);
+    );
 
-        bytes32 name = bytes32(uint256(uint160(address(action))) << 96);
-        bytes32 parent = bytes32(uint256(uint160(_parent)) << 96);
+    function createAction(address _parent, uint256 _data) public {
+        Action action = new Action(_parent, _data);
+        parents[address(action)] = _parent;
 
-        actionName = name;
-        actionParent = parent;
-
-        addd(name, parent, _nodeData);
+        emit CreateAction(address(action), _parent, _data);
     }
 }
 
 contract Action {
+    address public parent;
     uint256 public data;
 
-    constructor(uint256 _data) public {
+    constructor(address _parent, uint256 _data) {
+        parent = _parent;
         data = _data;
     }
 }
