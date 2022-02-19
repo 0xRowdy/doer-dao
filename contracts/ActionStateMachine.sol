@@ -2,14 +2,22 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 /**
- * @title Ballot
- * @dev Implements voting process along with vote delegation
+ * @title Action State Machine
+ * @dev Implements life cycle of an action and enforces what functions are allowed
  */
 contract ActionStateMachine {
 
-    enum ActionStates{ AwaitProposal, GotProposal, AwaitVote, GotVote, AwaitExecution, GotExecution, AwaitEvaluation, GotEvaluation}
+    enum ActionStates{ ProposalsOpen, TokenStakingOpen, VotingOpen, ExecutionOpen, EvaluationsOpen}
 
-    ActionStates public state = ActionStates.AwaitProposal;
+    struct Proposal {
+        uint id;
+        string name;
+        string description;
+        uint cost;
+    }
+
+    ActionStates public state = ActionStates.ProposalsOpen;
+    Proposal[] public proposals;
 
     modifier onlyState(ActionStates expected) {
         require(state == expected, "Not permitted in this state");
@@ -17,10 +25,8 @@ contract ActionStateMachine {
     }
 
     // TODO Create Events
-    event Proposal(
-        // address indexed _from,
-        // address indexed _to,
-        // bytes32 _value
+    event ProposalsClosed(
+        string name
     );
 
     event Vote(
@@ -30,9 +36,9 @@ contract ActionStateMachine {
     );
 
     event Execute(
-        // address indexed _from,
-        // address indexed _to,
-        // bytes32 _value
+      // address indexed _from,
+      // address indexed _to,
+      // bytes32 _value
     );
 
     event Evaluate(
@@ -41,36 +47,40 @@ contract ActionStateMachine {
         // bytes32 _value
     );
 
-    function setProposal() public onlyState(ActionStates.AwaitProposal) {
-        state = ActionStates.GotProposal;
+    function setProposal(string memory _name, string memory _description, uint _cost) public onlyState(ActionStates.ProposalsOpen) {
+        Proposal memory _proposal = Proposal({
+            id: block.timestamp,
+            name: _name,
+            description: _description,
+            cost: _cost
+        });
+        proposals.push(_proposal);
     }
 
-    function getProposal() public onlyState(ActionStates.GotProposal) {
-        state = ActionStates.AwaitVote;
+    function getProposals() external view returns (Proposal[] memory) {
+        return proposals;
     }
 
-    function setVote() public onlyState(ActionStates.AwaitVote) {
-        state = ActionStates.GotVote;
+    function closeProposals() public onlyState(ActionStates.ProposalsOpen) {
+        // When Proposal window is closed by govenance
+        emit ProposalsClosed( "closed");
+        state = ActionStates.TokenStakingOpen;
     }
 
-    function getVote() public onlyState(ActionStates.GotVote) {
-        state = ActionStates.AwaitExecution;
+    function closeTokenStaking() public onlyState(ActionStates.TokenStakingOpen) {
+        state = ActionStates.VotingOpen;
     }
 
-    function setExecution() public onlyState(ActionStates.AwaitExecution) {
-        state = ActionStates.GotExecution;
+    function closeVoting() public onlyState(ActionStates.VotingOpen) {
+        state = ActionStates.ExecutionOpen;
     }
 
-    function getExecution() public onlyState(ActionStates.GotExecution) {
-        state = ActionStates.AwaitEvaluation;
+    function closeExecution() public onlyState(ActionStates.ExecutionOpen) {
+        state = ActionStates.EvaluationsOpen;
     }
 
-    function setEvaluation() public onlyState(ActionStates.AwaitEvaluation) {
-        state = ActionStates.GotEvaluation;
-    }
-
-    function getEvaluation() public onlyState(ActionStates.GotEvaluation) {
-        state = ActionStates.AwaitProposal;
+    function closeEvaluations() public onlyState(ActionStates.EvaluationsOpen) {
+        state = ActionStates.ProposalsOpen;
     }
 
     // function terminate() public onlyContractOwner {

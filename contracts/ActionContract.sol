@@ -7,32 +7,17 @@ import "./ActionStateMachine.sol";
  * @dev Implements voting process along with vote delegation
  */
 
-contract Action is ActionStateMachine{
-
+contract Action is ActionStateMachine {
     struct ActionStruct {
-        uint id;
+        uint256 id;
         ActionStates state;
         string name;
         string description;
-        uint cost;
+        uint256 cost;
         address delegate; // address/person delegated to
-    }
-
-    modifier onlyState(ActionStates expected) {
-        require(state == expected, "Not permitted in this state");
-        _;
     }
 
     ActionStruct public newAction;
 
-    constructor() {
-
-    }
-
-    function createAction(string memory _name, string memory _description, uint memory _cost) onlyOwner public {
-        newAction.name = _name;
-        newAction.description = _description;
-        newAction.cost = _cost;
-    }
-
+    constructor() {}
 }
