@@ -7,27 +7,34 @@ import Header from "../components/globalNav";
 import Hero from "../components/hero/Hero";
 import ActionList from "../components/actions/ActionList";
 import { getFeaturedActions } from "../mock-data/actions";
+import ActionForm from "../components/actions/ActionForm";
+import Button from "../components/ui/Button";
 
 const HomePage: NextPage = () => {
+  const createTopLevelAction = () => {
+    console.log("creating action");
+  };
+
   const featuredActions = getFeaturedActions();
   console.log("Actions", featuredActions);
   return (
     <div className={styles.container}>
       <Head>
-        {/* <title>Doer DAO</title> */}
+        <title>Doer DAO</title>
         <meta
           name="description"
           content="DoerDAO empowers creators to DAOify their production process, grow and manage their community using bounties, composable governance, advanced treasury management, and community dividends."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Hero />
       <main className={styles.main}>
-        <ActionList actions={featuredActions} />
-        <h1 className={styles.title}>Doer DAO</h1>
-        <h1 className="text-3xl font-bold underline">Doer DAO</h1>
+        <Hero />
+        <button onClick={createTopLevelAction}></button>
+        <div className="max-w-7xl mx-auto">
+          <ActionForm />
+        </div>
 
+        <ActionList actions={featuredActions} />
         <div className={styles.grid}></div>
       </main>
 
