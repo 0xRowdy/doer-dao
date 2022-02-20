@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 import Header from "../components/globalNav";
+import Hero from "../components/hero/Hero";
 import ActionList from "../components/actions/ActionList";
 import { getFeaturedActions } from "../mock-data/actions";
 
@@ -21,7 +22,7 @@ const HomePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header></Header>
+      <Hero />
       <main className={styles.main}>
         <ActionList actions={featuredActions} />
         <h1 className={styles.title}>Doer DAO</h1>
