@@ -1,10 +1,4 @@
-type Proposal = {
-  id: number;
-  name: string;
-  description: string;
-  cost: number;
-  childProposals: Proposal[] | null;
-};
+import { Proposal } from "../types/proposal/proposal";
 
 export const mockProposals: Proposal[] = [
   {

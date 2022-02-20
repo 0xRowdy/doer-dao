@@ -1,31 +1,34 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 
-import Header from '../components/header'
+import Header from "../components/globalNav";
+import Hero from "../components/hero/Hero";
+import ActionList from "../components/actions/ActionList";
+import { getFeaturedActions } from "../mock-data/actions";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
+  const featuredActions = getFeaturedActions();
+  console.log("Actions", featuredActions);
   return (
     <div className={styles.container}>
       <Head>
-        <title>Doer DAO</title>
-        <meta name="description" content="DoerDAO empowers creators to DAOify their production process, grow and manage their community using bounties, composable governance, advanced treasury management, and community dividends." />
+        {/* <title>Doer DAO</title> */}
+        <meta
+          name="description"
+          content="DoerDAO empowers creators to DAOify their production process, grow and manage their community using bounties, composable governance, advanced treasury management, and community dividends."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <Header></Header>
+      <Hero />
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Doer DAO
-        </h1>
-        <h1 className='text-3xl font-bold underline'>
-          Doer DAO
-        </h1>
+        <ActionList actions={featuredActions} />
+        <h1 className={styles.title}>Doer DAO</h1>
+        <h1 className="text-3xl font-bold underline">Doer DAO</h1>
 
-        <div className={styles.grid}>
-
-        </div>
+        <div className={styles.grid}></div>
       </main>
 
       <footer className={styles.footer}>
@@ -34,14 +37,14 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Become a Doer{' '}
+          Become a Doer{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default HomePage;
