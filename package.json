@@ -12,7 +12,9 @@
     "@ethers-react/system": "^0.0.2",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
+    "@metamask/detect-provider": "^1.2.0",
     "@openzeppelin/contracts": "^4.5.0",
+    "bnc-onboard": "^1.38.1",
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2"
