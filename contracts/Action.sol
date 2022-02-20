@@ -2,7 +2,9 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-contract Action {
+import "./ActionStateMachine.sol";
+
+contract Action is ActionStateMachine {
     address public parent;
     uint256 public data;
 
