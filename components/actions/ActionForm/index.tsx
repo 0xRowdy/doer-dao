@@ -11,6 +11,7 @@ export default function index() {
     //   [name]: value
     // });
   };
+
   const handleSubmit = (event: FormEvent) => {
     // alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
@@ -24,37 +25,33 @@ export default function index() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="first-name"
+                  htmlFor="action-name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  First name
+                  Action name
                 </label>
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
-                  autoComplete="given-name"
+                  name="action-name"
+                  id="action-name"
                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="last-name"
+                  htmlFor="action-description"
                   className="block text-sm font-medium text-gray-700"
-                >
-                  Last name
-                </label>
+                ></label>
                 <input
                   type="text"
-                  name="last-name"
-                  id="last-name"
-                  autoComplete="family-name"
+                  name="action-description"
+                  id="action-description"
                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
               </div>
 
-              <div className="col-span-6 sm:col-span-4">
+              {/* <div className="col-span-6 sm:col-span-4">
                 <label
                   htmlFor="email-address"
                   className="block text-sm font-medium text-gray-700"
@@ -68,7 +65,7 @@ export default function index() {
                   autoComplete="email"
                   className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 />
-              </div>
+              </div> */}
 
               <div className="col-span-6 sm:col-span-3">
                 <label
@@ -159,7 +156,7 @@ export default function index() {
               type="submit"
               className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Save
+              Create Action
             </button>
           </div>
         </div>
