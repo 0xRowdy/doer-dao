@@ -1,9 +1,12 @@
-import React from "react";
+import React, { ReactChildren } from "react";
 import Link from "next/link";
 
 // import classes from "./Button.module.css";
 
-export default function Button(props: { link: string; children: string }) {
+export default function Button(props: {
+  link: string;
+  children: string | JSX.Element[];
+}) {
   return (
     <div className="rounded shadow">
       <Link href={props.link}>

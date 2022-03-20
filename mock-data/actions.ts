@@ -14,7 +14,7 @@ const DUMMY_ACTIONS: Action[] = [
   },
   {
     id: "0x01",
-    title: "Networking for introverts",
+    title: "Edit Video",
     description:
       "We know: Networking is no fun if you are an introvert person. That's why we came up with this event - it'll be so much easier. Promised!",
     location: "New Wall Street 5, 98765 New Work",
@@ -25,7 +25,7 @@ const DUMMY_ACTIONS: Action[] = [
   },
   {
     id: "0x02",
-    title: "Networking for extroverts",
+    title: "Create Marketing Campaign",
     description:
       "You probably need no help with networking in general. But focusing your energy correctly - that is something where most people can improve.",
     location: "My Street 12, 10115 Broke City",
@@ -80,6 +80,6 @@ export function getFilteredActions(dateFilter: any) {
   return filteredEvents;
 }
 
-export function getActionById(id: string) {
+export function getActionById(id: any) {
   return DUMMY_ACTIONS.find((event) => event.id === id);
 }

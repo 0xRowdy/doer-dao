@@ -11,7 +11,7 @@ const navigation = [
   { name: "Company", href: "#" },
 ];
 
-export default function Hero() {
+export default function Hero(props: { handleLoginClick: any }) {
   return (
     <div className="relative bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -34,13 +34,13 @@ export default function Hero() {
               >
                 <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                   <div className="flex items-center justify-between w-full md:w-auto">
-                    <a href="#">
+                    {/* <a href="#">
                       <span className="sr-only">Workflow</span>
                       <img
                         className="h-8 w-auto sm:h-10"
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                       />
-                    </a>
+                    </a> */}
                     <div className="-mr-2 flex items-center md:hidden">
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                         <span className="sr-only">Open main menu</span>
@@ -49,7 +49,7 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+                {/* <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                   {navigation.map((item) => (
                     <a
                       key={item.name}
@@ -65,7 +65,7 @@ export default function Hero() {
                   >
                     Launch App
                   </a>
-                </div>
+                </div> */}
               </nav>
             </div>
 
@@ -134,7 +134,10 @@ export default function Hero() {
                 fugiat aliqua.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div className="rounded shadow">
+                <div
+                  className="rounded shadow"
+                  onClick={props.handleLoginClick}
+                >
                   <Button link="#">Launch App</Button>
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
