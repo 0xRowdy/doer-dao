@@ -13,7 +13,7 @@ import { NETWORKS } from "../constants";
 import { ethers, Signer, Wallet } from "ethers";
 import actionFactory from "../artifacts/contracts/ActionFactory.sol/ActionFactory.json";
 import Onboard from "@web3-onboard/core";
-import injectedModule from "@web3-onboard/injected-wallets";
+import injectedModule, { ProviderLabel } from "@web3-onboard/injected-wallets";
 import {
   useConnectWallet,
   useSetChain,
@@ -29,7 +29,11 @@ import fortmaticModule from "@web3-onboard/fortmatic";
 import torusModule from "@web3-onboard/torus";
 import keepkeyModule from "@web3-onboard/keepkey";
 
-const injected = injectedModule();
+const injected = injectedModule({
+  filter: {
+    [ProviderLabel.Detected]: false,
+  },
+});
 const walletLink = walletLinkModule();
 const walletConnect = walletConnectModule();
 const portis = portisModule({
@@ -52,17 +56,7 @@ const trezorOptions = {
 const trezor = trezorModule(trezorOptions);
 
 const web3Onboard = init({
-  wallets: [
-    ledger,
-    trezor,
-    walletConnect,
-    keepkey,
-    walletLink,
-    injected,
-    fortmatic,
-    portis,
-    torus,
-  ],
+  wallets: [injected, portis],
   chains: [
     {
       id: "0x1",
@@ -104,6 +98,10 @@ const HomePage: NextPage = () => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [{ chains, connectedChain, settingChain }, setChain] = useSetChain();
   const connectedWallets = useWallets();
+
+  const [web3Onboard, setWeb3Onboard] = useState(null);
+  const [notify, setNotify] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
   const [signature, setSignature] = useState({
     signature: "",
   });
@@ -147,7 +145,7 @@ const HomePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {signature.signature.length > 0 ? (
+      {wallet ? (
         <div className="">
           <ActionForm />
         </div>

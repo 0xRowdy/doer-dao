@@ -38,7 +38,7 @@ function ActionItem(props: { action: Action }) {
         <div className={classes.actions}>
           <Button link={actionLink}>
             <span className={classes.icon}></span>
-            <span>Explore Action</span>
+            <span>Explore Bounty</span>
           </Button>
         </div>
       </div>
