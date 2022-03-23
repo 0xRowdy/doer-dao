@@ -10,7 +10,10 @@ export default function Layout(props: any) {
         <Header />
       </header>
       <main className={styles.main}>{props.children}</main>
-      <footer className={styles.footer}>
+      <footer
+        className="text-center text-white"
+        style={{ backgroundColor: "#f1f1f1" }}
+      >
         <Footer />
       </footer>
     </Fragment>

@@ -16,7 +16,7 @@ const DUMMY_ACTIONS: Action[] = [
     id: "0x01",
     title: "Edit Video",
     description:
-      "We know: Networking is no fun if you are an introvert person. That's why we came up with this event - it'll be so much easier. Promised!",
+      "We know: Creating well editied videos is important. If you feel like this bounty is in your skill set please submit an application to apply for the bounty.",
     location: "New Wall Street 5, 98765 New Work",
     date: "2021-05-30",
     image: "assets/images/nat-2.jpg",
